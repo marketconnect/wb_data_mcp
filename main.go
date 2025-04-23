@@ -45,7 +45,7 @@ func main() {
 		mcpserver.WithBaseURL(baseURL),
 		mcpserver.WithBasePath("/"),
 		mcpserver.WithSSEEndpoint("/events"),
-		mcpserver.WithMessageEndpoint("/"),
+		mcpserver.WithMessageEndpoint("/messages"),
 		mcpserver.WithKeepAlive(true),
 	)
 	if sseServer == nil {
