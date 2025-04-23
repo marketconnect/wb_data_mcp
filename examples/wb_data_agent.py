@@ -11,10 +11,10 @@ async def get_tools_async(server_url):
     # Правильный адрес для подключения как клиент
     
     params = SseServerParams(
-        url=f"{server_url}/events",            # SSE-поток
+        url=f"{server_url}/events",
         headers={"Accept": "text/event-stream"},
-        message_url=f"{server_url}/messages"   # HTTP-POST endpoint
     )
+
     tools, exit_stack = await MCPToolset.from_server(connection_params=params)
     return tools, exit_stack
 
