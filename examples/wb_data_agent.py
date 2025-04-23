@@ -12,9 +12,8 @@ async def get_tools_async(server_url: str):
     server_url = server_url.rstrip('/')
     
     params = SseServerParams(
-        url=server_url,
-        events_url=f"{server_url}/events",
-        headers={}
+    url=f"{server_url}/events",
+    headers={"Accept": "text/event-stream"}
     )
     tools, exit_stack = await MCPToolset.from_server(connection_params=params)
     return tools, exit_stack
