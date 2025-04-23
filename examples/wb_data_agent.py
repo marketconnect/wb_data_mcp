@@ -7,7 +7,7 @@ from google.adk.sessions import InMemorySessionService
 from google.genai import types
 import asyncio
 
-async def get_tools_async(server_url: str = "http://localhost:8082"):
+async def get_tools_async(server_url):
     # Правильный адрес для подключения как клиент
     
     params = SseServerParams(
@@ -21,7 +21,8 @@ async def get_tools_async(server_url: str = "http://localhost:8082"):
 async def main():
     tools, exit_stack = await get_tools_async()
     # Get the MCP server URL from environment variable, defaulting to localhost:8082
-
+    # server_url = "http://0.0.0.0:8082"
+    server_url = "http://localhost:8082"
 
     
     try:
