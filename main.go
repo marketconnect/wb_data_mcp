@@ -43,6 +43,7 @@ func main() {
 	baseURL := fmt.Sprintf("http://%s:%s", cfg.Server.IP, cfg.Server.Port)
 	sseServer := mcpserver.NewSSEServer(mcpImpl,
 		mcpserver.WithBaseURL(baseURL),
+		mcpserver.WithUseFullURLForMessageEndpoint(false),
 		mcpserver.WithBasePath("/"),
 		mcpserver.WithSSEEndpoint("/events"),
 		mcpserver.WithMessageEndpoint("/messages"),

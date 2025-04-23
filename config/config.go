@@ -7,7 +7,7 @@ import (
 // Config holds all the application configuration
 type Config struct {
 	Server struct {
-		IP   string `env:"WB_DATA_MCP_IP" envDefault:"0.0.0.0"`
+		IP   string `env:"WB_DATA_MCP_IP" envDefault:"localhost"`
 		Port string `env:"WB_DATA_MCP_PORT" envDefault:"8082"` // Changed default port
 	}
 

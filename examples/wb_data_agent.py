@@ -7,20 +7,22 @@ from google.adk.sessions import InMemorySessionService
 from google.genai import types
 import asyncio
 
-async def get_tools_async(server_url: str):
-    # Remove any trailing slashes from the server_url
-    server_url = server_url.rstrip('/')
+async def get_tools_async(server_url: str = "http://localhost:8082"):
+    # Правильный адрес для подключения как клиент
     
     params = SseServerParams(
-        url=f"{server_url}/events",
-        headers={"Accept": "text/event-stream"}
+        url=f"{server_url}/events",            # SSE-поток
+        headers={"Accept": "text/event-stream"},
+        message_url=f"{server_url}/messages"   # HTTP-POST endpoint
     )
     tools, exit_stack = await MCPToolset.from_server(connection_params=params)
     return tools, exit_stack
 
 async def main():
+    tools, exit_stack = await get_tools_async()
     # Get the MCP server URL from environment variable, defaulting to localhost:8082
-    server_url = "http://0.0.0.0:8082"
+
+
     
     try:
         tools, exit_stack = await get_tools_async(server_url)
