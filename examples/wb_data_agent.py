@@ -12,15 +12,15 @@ async def get_tools_async(server_url: str):
     server_url = server_url.rstrip('/')
     
     params = SseServerParams(
-    url=f"{server_url}/events",
-    headers={"Accept": "text/event-stream"}
+        url=f"{server_url}/events",
+        headers={"Accept": "text/event-stream"}
     )
     tools, exit_stack = await MCPToolset.from_server(connection_params=params)
     return tools, exit_stack
 
 async def main():
     # Get the MCP server URL from environment variable, defaulting to localhost:8082
-    server_url = os.getenv("WB_DATA_MCP_URL", "http://localhost:8082")
+    server_url = "http://localhost:8082"
     
     try:
         tools, exit_stack = await get_tools_async(server_url)
