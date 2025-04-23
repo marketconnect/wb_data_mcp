@@ -19,10 +19,10 @@ async def get_tools_async(server_url):
     return tools, exit_stack
 
 async def main():
-    tools, exit_stack = await get_tools_async()
+    server_url = "http://localhost:8082"
+    
     # Get the MCP server URL from environment variable, defaulting to localhost:8082
     # server_url = "http://0.0.0.0:8082"
-    server_url = "http://localhost:8082"
 
     
     try:
