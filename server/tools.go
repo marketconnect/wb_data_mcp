@@ -41,7 +41,21 @@ func HandleQueryTool(ctx context.Context, request mcp.CallToolRequest) (*mcp.Cal
 	if !ok {
 		return mcp.NewToolResultError("database not found in context"), nil
 	}
+	// Check if the request is valid
+	if request.Params.Arguments["table_name"] == nil || request.Params.Arguments["fields"] == nil {
+		return mcp.NewToolResultError("missing required parameters"), nil
+	}
 
+	// Check if the request is a valid tool call
+	raw := request.Params.Arguments["fields"]
+	if _, ok := raw.(string); !ok {
+		return mcp.NewToolResultError("missing or invalid ‘fields’ parameter"), nil
+	}
+	// Check if the request is a valid tool call
+	raw = request.Params.Arguments["table_name"]
+	if _, ok = raw.(string); !ok {
+		return mcp.NewToolResultError("missing or invalid ‘table_name’ parameter"), nil
+	}
 	// Parse request parameters
 	tableName := request.Params.Arguments["table_name"].(string)
 	fieldsStr := request.Params.Arguments["fields"].(string)
